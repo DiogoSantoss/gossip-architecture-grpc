@@ -1,0 +1,23 @@
+syntax = "proto3";
+package pt.ulisboa.tecnico.classes.contract.classserver;
+
+import "ClassesDefinitions.proto";
+
+// ClassServer -> ClassServer Service
+
+message GossipRequest {
+  ClassState classState = 1;
+  string serverQualifier = 2;
+  int32 serverId = 3;
+  VectorClockState vectorClockState = 4;
+}
+
+message GossipResponse {
+  ResponseCode code = 1;
+  ClassState classState = 2;
+  VectorClockState vectorClockState = 3;
+}
+
+service ClassServerService {
+  rpc gossip(GossipRequest) returns (GossipResponse);
+}
